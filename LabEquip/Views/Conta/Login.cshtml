@@ -1,0 +1,23 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Aceder ao portal</title>
+</head>
+<body>
+    <h1>Aceder ao LabEquip</h1>
+    <form method="post" action="/Conta/Login">
+        <label>Conta</label>
+        <input type="email" name="Email" required />
+        <br />
+        <label>Senha</label>
+        <input type="password" name="Senha" required />
+        <button type="submit">Entrar</button>
+    </form>
+</body>
+</html>
