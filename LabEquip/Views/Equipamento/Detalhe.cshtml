@@ -1,0 +1,61 @@
+﻿@using LabEquip.Models;
+@model Equipamento;
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="/css/labequip.css" />
+    <title>Detalhe</title>
+</head>
+<body>
+    <h1>Detalhe do Equipamento</h1>
+    <table>
+        <tr>
+            <td><strong>Guid:</strong></td>
+            <td>@Model.GuidEquipamento</td>
+        </tr>
+        <tr>
+            <td><strong>Designação:</strong></td>
+            <td>@Model.Designacao</td>
+        </tr>
+        <tr>
+            <td><strong>Descrição:</strong></td>
+            <td>@Model.Descricao</td>
+        </tr>
+        <tr>
+            <td><strong>Localização:</strong></td>
+            <td>@Model.Localizacao</td>
+        </tr>
+        <tr>
+            <td><strong>Número de Série:</strong></td>
+            <td>@Model.NumeroSerie</td>
+        </tr>
+        <tr>
+            <td><strong>Fabricante:</strong></td>
+            <td>@Model.Fabricante</td>
+        </tr>
+        <tr>
+            <td><strong>Modelo:</strong></td>
+            <td>@Model.Modelo</td>
+        </tr>
+        <tr>
+            <td><strong>Data de Aquisição:</strong></td>
+            <td>@Model.DataAquisicao</td>
+        </tr>
+        <tr>
+            <td><strong>Estado:</strong></td>
+            <td>
+                @(Model.Estado == Equipamento.EstadoEquipamento.Disponivel ? "Disponível" :
+                    Model.Estado == Equipamento.EstadoEquipamento.EmUso ? "Em Uso" :
+                    Model.Estado == Equipamento.EstadoEquipamento.Manutencao ? "Manutenção" : "Inativo")
+            </td>
+        </tr>
+    </table>
+    <a href="/Equipamento/Index">Home</a>
+</body>
+</html> 
