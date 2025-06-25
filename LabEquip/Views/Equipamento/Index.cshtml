@@ -1,0 +1,116 @@
+﻿@using LabEquip.Models
+@model IEnumerable<Equipamento>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="/css/labequip.css" />
+    <title>LabEquip - Gestão de Equipamentos</title>
+</head>
+<body>
+    <h1>🔬 LabEquip - Gestão de Equipamentos de Laboratório</h1>
+
+    <div class="links">
+        @if (ViewBag.Conta.NivelAcesso > 0)
+        {
+            <p>✅ <a href="/Equipamento/Criar">Criar Equipamento</a></p>
+            <p>📋 <a href="/Equipamento/MinhasRequisicoes">Minhas Requisições</a></p>
+            <p>🚪 <a href="/Conta/Logout">Sair</a></p>
+        }
+        else
+        {
+            <p>⚠️ Para criar equipamentos é necessário autenticar-se</p>
+            <p>🔐 <a href="/Conta/Login">Entrar</a></p>
+        }
+
+        <p>✅ <a href="/Equipamento/Index/0">Equipamentos Disponíveis</a></p>
+        <p>🔧 <a href="/Equipamento/Index/1">Equipamentos Em Uso</a></p>
+        <p>⚙️ <a href="/Equipamento/Index/2">Equipamentos Em Manutenção</a></p>
+        <p>❌ <a href="/Equipamento/Index/3">Equipamentos Inativos</a></p>
+        <p>📚 <a href="/Equipamento/Index/3">Todos os Equipamentos</a></p>
+    </div>
+
+    <table>
+        <tr>
+            <th>Guid</th>
+            <th>Designação</th>
+            <th>Descrição</th>
+            <th>Localização</th>
+            <th>Fabricante</th>
+            <th>Modelo</th>
+            <th class="center">Estado</th>
+            <th class="center">Operações</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.GuidEquipamento</td>
+                <td>@item.Designacao</td>
+                <td>@item.Descricao</td>
+                <td>@item.Localizacao</td>
+                <td>@item.Fabricante</td>
+                <td>@item.Modelo</td>
+                <td class="center">
+                    @switch (item.Estado)
+                    {
+                        case Equipamento.EstadoEquipamento.Disponivel:
+                            <span class="status-disponivel">Disponível</span>
+                            break;
+                        case Equipamento.EstadoEquipamento.EmUso:
+                            <span class="status-emuso">Em Uso</span>
+                            break;
+                        case Equipamento.EstadoEquipamento.Manutencao:
+                            <span class="status-manutencao">Manutenção</span>
+                            break;
+                        case Equipamento.EstadoEquipamento.Inativo:
+                            <span class="status-inativo">Inativo</span>
+                            break;
+                    }
+                </td>
+                <td class="center">
+                    <a href="/Equipamento/Detalhe/@item.GuidEquipamento">Detalhe</a>
+                    @if (ViewBag.Conta.NivelAcesso > 0)
+                    {
+                        @: | <a href="/Equipamento/Editar/@item.GuidEquipamento">Editar</a>
+                        @if (item.Estado == Equipamento.EstadoEquipamento.Disponivel)
+                        {
+                            @: | <a href="/Equipamento/Requisitar/@item.GuidEquipamento">Requisitar</a>
+                        }
+                    }
+                    @if (ViewBag.Conta.NivelAcesso == 2)
+                    {
+                        @: | <a href="/Equipamento/Eliminar/@item.GuidEquipamento" onclick="return confirm('Tem certeza que deseja eliminar este equipamento?')">Eliminar</a>
+                    }
+                </td>
+            </tr>
+        }
+    </table>
+
+    <table class="summary-table">
+        <tr>
+            <td>Número Total de Equipamentos:</td>
+            <td>@ViewBag.NumeroEquipamentos</td>
+        </tr>
+        <tr>
+            <td>Equipamentos Disponíveis:</td>
+            <td>@ViewBag.TotalDisponiveis</td>
+        </tr>
+        <tr>
+            <td>Equipamentos Em Uso:</td>
+            <td>@ViewBag.TotalEmUso</td>
+        </tr>
+        <tr>
+            <td>Equipamentos Inativos:</td>
+            <td>@ViewBag.TotalInativos</td>
+        </tr>
+    </table>
+
+    <div class="user-info">
+        👤 Utilizador: @ViewBag.Conta.Nome &nbsp;&nbsp;|&nbsp;&nbsp; ✉️ Contacto: @ViewBag.Conta.Email
+    </div>
+</body>
+</html>
