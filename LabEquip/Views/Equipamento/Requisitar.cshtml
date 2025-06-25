@@ -1,0 +1,43 @@
+﻿@using LabEquip.Models;
+@model Equipamento;
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Requisitar</title>
+</head>
+<body>
+    <h1>Requisitar Equipamento</h1>
+
+    <h3>Equipamento: @Model.Designacao</h3>
+    <p>Localização: @Model.Localizacao</p>
+    <p>Estado: Disponível</p>
+
+    <form method="post" action="/equipamento/requisitar/@Model.GuidEquipamento">
+        <table>
+            <tr>
+                <td><label>Data de Início:</label></td>
+                <td><input type="datetime-local" name="dataInicio" required /></td>
+            </tr>
+            <tr>
+                <td><label>Data de Fim:</label></td>
+                <td><input type="datetime-local" name="dataFim" required /></td>
+            </tr>
+            <tr>
+                <td><label>Motivo:</label></td>
+                <td><textarea name="motivo" rows="4" required></textarea></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <button type="submit">Confirmar Requisição</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

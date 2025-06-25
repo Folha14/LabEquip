@@ -1,0 +1,65 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Criar</title>
+</head>
+<body>
+    <h1>Criar Equipamento</h1>
+    <form method="post" action="/equipamento/criar">
+        <table>
+            <tr>
+                <td><label>Designação:</label></td>
+                <td><input type="text" name="designacao" /></td>
+            </tr>
+            <tr>
+                <td><label>Descrição:</label></td>
+                <td><input type="text" name="descricao" /></td>
+            </tr>
+            <tr>
+                <td><label>Localização:</label></td>
+                <td><input type="text" name="localizacao" /></td>
+            </tr>
+            <tr>
+                <td><label>Número de Série:</label></td>
+                <td><input type="text" name="numeroSerie" /></td>
+            </tr>
+            <tr>
+                <td><label>Fabricante:</label></td>
+                <td><input type="text" name="fabricante" /></td>
+            </tr>
+            <tr>
+                <td><label>Modelo:</label></td>
+                <td><input type="text" name="modelo" /></td>
+            </tr>
+            <tr>
+                <td><label>Data de Aquisição:</label></td>
+                <td><input type="date" name="dataAquisicao" /></td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Estado:</label>
+                </td>
+                <td>
+                    <select name="estado">
+                        <option value="0">Disponível</option>
+                        <option value="1">Em Uso</option>
+                        <option value="2">Manutenção</option>
+                        <option value="3">Inativo</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <button type="submit">Criar</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
