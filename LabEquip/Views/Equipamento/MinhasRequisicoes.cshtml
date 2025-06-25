@@ -1,0 +1,78 @@
+﻿@using LabEquip.Models
+@model IEnumerable<Requisicao>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Minhas Requisições</title>
+</head>
+<body>
+    <h1>📋 Minhas Requisições</h1>
+
+    <div class="links">
+        <p>🏠 <a href="/Equipamento/Index">Voltar aos Equipamentos</a></p>
+        <p>📦 <a href="/Equipamento/Criar">Criar Equipamento</a></p>
+        <p>🚪 <a href="/Conta/Logout">Sair</a></p>
+    </div>
+
+    @if (Model.Any())
+    {
+        <table>
+            <tr>
+                <th>Equipamento</th>
+                <th>Data Início</th>
+                <th>Data Fim</th>
+                <th>Motivo</th>
+                <th class="center">Estado</th>
+                <th class="center">Operações</th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.IdEquipamento</td>
+                    <td>@item.DataInicio.ToString("dd/MM/yyyy HH:mm")</td>
+                    <td>@item.DataFim.ToString("dd/MM/yyyy HH:mm")</td>
+                    <td>@item.Motivo</td>
+                    <td class="center">
+                        @switch (item.Estado)
+                        {
+                            case Requisicao.EstadoRequisicao.Pendente:
+                                @:Pendente
+                                break;
+                            case Requisicao.EstadoRequisicao.Aprovada:
+                                @:Aprovada
+                                break;
+                            case Requisicao.EstadoRequisicao.Ativa:
+                                @:Ativa
+                                break;
+                            case Requisicao.EstadoRequisicao.Rejeitada:
+                                @:Rejeitada
+                                break;
+                            case Requisicao.EstadoRequisicao.Cancelada:
+                                @:Cancelada
+                                break;
+                            case Requisicao.EstadoRequisicao.Concluida:
+                                @:Concluída
+                                break;
+                        }
+                    </td>
+                    <td class="center">
+                        @if (item.Estado == Requisicao.EstadoRequisicao.Ativa)
+                        {
+                            <a href="/Equipamento/DevolverEquipamento/@item.IdEquipamento">Devolver</a>
+                        }
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+    else
+    {
+        <p>📭 Não possui requisições de equipamentos.</p>
+    }
+</body>
+</html>
