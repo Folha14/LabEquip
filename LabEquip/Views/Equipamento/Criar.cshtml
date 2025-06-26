@@ -1,0 +1,70 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="/css/labequip.css" />
+    <title>Criar Equipamento</title>
+</head>
+<body>
+    <h1>Criar Equipamento</h1>
+
+    <div class="links">
+        <p>🏠 <a href="/Equipamento/Index">Voltar à Lista</a></p>
+    </div>
+
+    <form method="post" action="/Equipamento/Criar">
+        <table>
+            <tr>
+                <td><label>Designação:</label></td>
+                <td><input type="text" name="designacao" required /></td>
+            </tr>
+            <tr>
+                <td><label>Descrição:</label></td>
+                <td><input type="text" name="descricao" /></td>
+            </tr>
+            <tr>
+                <td><label>Localização:</label></td>
+                <td><input type="text" name="localizacao" /></td>
+            </tr>
+            <tr>
+                <td><label>Número de Série:</label></td>
+                <td><input type="text" name="numeroSerie" /></td>
+            </tr>
+            <tr>
+                <td><label>Fabricante:</label></td>
+                <td><input type="text" name="fabricante" /></td>
+            </tr>
+            <tr>
+                <td><label>Modelo:</label></td>
+                <td><input type="text" name="modelo" /></td>
+            </tr>
+            <tr>
+                <td><label>Data de Aquisição:</label></td>
+                <td><input type="date" name="dataAquisicao" /></td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Estado:</label>
+                </td>
+                <td>
+                    <select name="estado">
+                        <option value="0">Disponível</option>
+                        <option value="1">Em Uso</option>
+                        <option value="2">Manutenção</option>
+                        <option value="3">Inativo</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <button type="submit">Criar</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

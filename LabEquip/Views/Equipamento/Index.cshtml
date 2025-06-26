@@ -1,0 +1,113 @@
+﻿@using LabEquip.Models
+@model IEnumerable<Equipamento>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="/css/labequip.css" />
+    <title>Lista de Equipamentos</title>
+</head>
+<body>
+    <h1>🔬 Lista de Equipamentos</h1>
+
+    <div class="links">
+        @if (ViewBag.Conta.nivelAcesso > 0)
+        {
+            <p>✅ <a href="/Equipamento/Criar">Criar Equipamentos</a></p>
+            @if (ViewBag.Conta.nivelAcesso == 2)
+            {
+                <p>👥 <a href="/Utilizador/Index">Gestão de Utilizadores</a></p>
+            }
+            <p>🚪 <a href="/Conta/Logout">Sair</a></p>
+        }
+        else
+        {
+            <p>⚠️ Não podes criar porque não estás autenticado</p>
+            <p>🔐 <a href="/Conta/Login">Entrar</a></p>
+        }
+
+        <p>📄 <a href="/Equipamento/Index/0">Lista dos Disponíveis</a></p>
+        <p>📦 <a href="/Equipamento/Index/1">Lista dos Em Uso</a></p>
+        <p>⚙️ <a href="/Equipamento/Index/2">Lista dos Em Manutenção</a></p>
+        <p>❌ <a href="/Equipamento/Index/3">Lista dos Inativos</a></p>
+        <p>📚 <a href="/Equipamento/Index/99">Lista de Todos os Equipamentos</a></p>
+    </div>
+
+    <table>
+        <tr>
+            <th>Guid</th>
+            <th>Designação</th>
+            <th>Localização</th>
+            <th>Fabricante</th>
+            <th>Modelo</th>
+            <th class="center">Estado</th>
+            <th class="center">Operações</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.guidEquipamento</td>
+                <td>@item.designacao</td>
+                <td>@item.localizacao</td>
+                <td>@item.fabricante</td>
+                <td>@item.modelo</td>
+                <td class="center">
+                    @((item.estado == Equipamento.EstadoEquipamento.Disponivel) ? "Disponível" :
+                        (item.estado == Equipamento.EstadoEquipamento.EmUso) ? "Em Uso" :
+                        (item.estado == Equipamento.EstadoEquipamento.Manutencao) ? "Manutenção" : "Inativo")
+                </td>
+                <td class="center">
+                    <a href="/Equipamento/Detalhe/@item.guidEquipamento">Detalhe</a>
+                    @if (ViewBag.Conta.nivelAcesso > 0)
+                    {
+                        @: | <a href="/Equipamento/Editar/@item.guidEquipamento">Editar</a>
+                    }
+                    @if (ViewBag.Conta.nivelAcesso == 2)
+                    {
+                        @: | <a href="/Equipamento/Matar/@item.guidEquipamento">Eliminar</a>
+                    }
+                </td>
+            </tr>
+        }
+    </table>
+
+    <table class="summary-table">
+        <tr>
+            <td>Número de Equipamentos:</td>
+            <td>@ViewBag.NumeroEquipamentos</td>
+        </tr>
+        <tr>
+            <td>Total Equipamentos Disponíveis:</td>
+            <td>@ViewBag.TotalDisponiveis</td>
+        </tr>
+        <tr>
+            <td>Total Equipamentos Em Uso:</td>
+            <td>@ViewBag.TotalEmUso</td>
+        </tr>
+        <tr>
+            <td>Total Equipamentos Inativos:</td>
+            <td>@ViewBag.TotalInativos</td>
+        </tr>
+    </table>
+
+    <div class="user-info">
+        👤 Utilizador: @ViewBag.Conta.nome &nbsp;&nbsp;|&nbsp;&nbsp; ✉️ Contacto: @ViewBag.Conta.email
+        @if (ViewBag.Conta.nivelAcesso == 2)
+        {
+            @: &nbsp;&nbsp;|&nbsp;&nbsp; 👑 Administrador
+        }
+        else if (ViewBag.Conta.nivelAcesso == 1)
+        {
+            @: &nbsp;&nbsp;|&nbsp;&nbsp; 👤 Utilizador Registado
+        }
+        else
+        {
+            @: &nbsp;&nbsp;|&nbsp;&nbsp; 👁️ Visitante
+        }
+    </div>
+</body>
+</html>

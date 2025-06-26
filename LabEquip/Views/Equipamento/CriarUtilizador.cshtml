@@ -1,0 +1,60 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="/css/labequip.css" />
+    <title>Criar Utilizador</title>
+</head>
+<body>
+    <h1>Criar Utilizador</h1>
+
+    <div class="links">
+        <p>🏠 <a href="/Equipamento/GestaoUtilizadores">Voltar à Lista</a></p>
+    </div>
+
+    <form method="post" action="/Equipamento/CriarUtilizador">
+        <table>
+            <tr>
+                <td><label>Nome:</label></td>
+                <td><input type="text" name="nome" required /></td>
+            </tr>
+            <tr>
+                <td><label>Email:</label></td>
+                <td><input type="email" name="email" required /></td>
+            </tr>
+            <tr>
+                <td><label>Senha:</label></td>
+                <td><input type="password" name="senha" required /></td>
+            </tr>
+            <tr>
+                <td><label>Nível de Acesso:</label></td>
+                <td>
+                    <select name="nivelAcesso">
+                        <option value="0">Visitante</option>
+                        <option value="1" selected>Utilizador</option>
+                        <option value="2">Administrador</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><label>Estado:</label></td>
+                <td>
+                    <select name="ativo">
+                        <option value="true" selected>Ativo</option>
+                        <option value="false">Inativo</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <button type="submit">Criar</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
