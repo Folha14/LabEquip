@@ -1,0 +1,73 @@
+﻿@using LabEquip.Models;
+@model Equipamento;
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="/css/labequip.css" />
+    <title>Editar Equipamento</title>
+</head>
+<body>
+    <h1>Editar Equipamento</h1>
+
+    <div class="links">
+        <p>🏠 <a href="/Equipamento/Index">Voltar à Lista</a></p>
+    </div>
+
+    <form method="post" action="/Equipamento/Editar">
+        <input type="hidden" name="id" value="@Model.GuidEquipamento" />
+        <table>
+            <tr>
+                <td><label>Designação:</label></td>
+                <td><input type="text" name="Designacao" value="@Model.Designacao" required /></td>
+            </tr>
+            <tr>
+                <td><label>Descrição:</label></td>
+                <td><input type="text" name="Descricao" value="@Model.Descricao" /></td>
+            </tr>
+            <tr>
+                <td><label>Localização:</label></td>
+                <td><input type="text" name="Localizacao" value="@Model.Localizacao" /></td>
+            </tr>
+            <tr>
+                <td><label>Número de Série:</label></td>
+                <td><input type="text" name="NumeroSerie" value="@Model.NumeroSerie" /></td>
+            </tr>
+            <tr>
+                <td><label>Fabricante:</label></td>
+                <td><input type="text" name="Fabricante" value="@Model.Fabricante" /></td>
+            </tr>
+            <tr>
+                <td><label>Modelo:</label></td>
+                <td><input type="text" name="Modelo" value="@Model.Modelo" /></td>
+            </tr>
+            <tr>
+                <td><label>Data de Aquisição:</label></td>
+                <td><input type="date" name="DataAquisicao" value="@Model.DataAquisicao.ToString("yyyy-MM-dd")" /></td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Estado:</label>
+                </td>
+                <td>
+                    <select name="Estado">
+                        <option value="0" @(Model.Estado == Equipamento.EstadoEquipamento.Disponivel ? " selected " : "")>Disponível</option>
+                        <option value="1" @(Model.Estado == Equipamento.EstadoEquipamento.EmUso ? " selected " : "")>Em Uso</option>
+                        <option value="2" @(Model.Estado == Equipamento.EstadoEquipamento.Manutencao ? " selected " : "")>Manutenção</option>
+                        <option value="3" @(Model.Estado == Equipamento.EstadoEquipamento.Inativo ? " selected " : "")>Inativo</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <button type="submit">Atualizar</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
